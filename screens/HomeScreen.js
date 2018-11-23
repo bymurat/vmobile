@@ -1,23 +1,95 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, AsyncStorage } from 'react-native';
+import { StyleSheet, View, Image,AsyncStorage } from 'react-native';
+import { Input , Text, Icon, Button } from 'react-native-elements';
+import oData from '../util/oDataHelper';
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
-    title: 'Welcome to the app!',
+    title: 'Varucon Mobile',
   };
 
   render() {
     return (
+
       <View style={styles.container}>
-        <Button title="Show me more of the app" onPress={this._showMoreApp} />
-        <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
+      <Image
+        style={{ marginLeft: 60, width:280, height:100 }}
+        source={require('../assets/varucon_logo.png')}/>
+      <View style={styles.innerView}>
+      <View style={{ flexDirection :'row'}}>
+
+      <View
+        style={{
+
+            margin: 25,
+            borderColor :'#517fa4',
+            borderWidth :0,
+            borderRadius : 15,
+            justifyContent: 'center',
+            alignItems: 'center'}}>
+      <Icon
+        size= {45}
+        reverse
+        name='address-card'
+        type='font-awesome'
+        color='#517fa4'
+        />
+        <Text h5> DANIŞMANLAR </Text>
+        </View>
+
+        <View style={{ margin: 25,
+        borderColor :'#517fa4',
+        borderWidth :0,
+        borderRadius : 15,justifyContent: 'center',alignItems: 'center',}}>
+        <Icon
+          size= {45}
+          reverse
+          name='assignment'
+          color='#517fa4'
+        />
+        <Text h5> EFORLARIM </Text>
+        </View>
+
+        </View>
+
+        <View style={{ flexDirection :'row'}}>
+        <View style={{ margin: 25,
+        borderColor :'#517fa4',
+        borderWidth :0,
+        borderRadius : 15,justifyContent: 'center',alignItems: 'center',}}>
+        <Icon
+          size= {45}
+          reverse
+          name='date-range'
+          color='#517fa4'
+        />
+        <Text h5> PLANLARIM </Text>
+        </View>
+
+        <View style={{ margin: 25,
+        borderColor :'#517fa4',
+        borderWidth :0,
+        borderRadius : 15,justifyContent: 'center',alignItems: 'center',}}>
+        <Icon
+          size= {45}
+          reverse
+          name='monetization-on'
+          color='#517fa4'
+        />
+        <Text h5> MASRAFLARIM </Text>
+        </View>
+        </View>
+      </View>
+
+      <View style={{flexDirection : 'flex-end'}}>
+      <Button
+        title="ÇIKIŞ YAP"
+        onPress={ () => this._signOutAsync() } 
+        buttonStyle={{backgroundColor:'#517fa4'}}></Button>
+      </View>
       </View>
     );
   }
-
-  _showMoreApp = () => {
-    this.props.navigation.navigate('Other');
-  };
 
   _signOutAsync = async () => {
     await AsyncStorage.clear();
@@ -29,7 +101,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'stretch',
+    justifyContent: 'flex-start',
   },
+  innerView : {
+    flex :1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 100,
+    marginTop : 30,
+    borderWidth : 0,
+    borderColor : 'red'
+  }
 });
