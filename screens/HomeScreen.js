@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image,AsyncStorage } from 'react-native';
+import { StyleSheet, View, Image,AsyncStorage, Alert } from 'react-native';
 import { Input , Text, Icon, Button } from 'react-native-elements';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import oData from '../util/oDataHelper';
 
 export default class HomeScreen extends Component {
@@ -33,7 +34,7 @@ export default class HomeScreen extends Component {
         name='address-card'
         type='font-awesome'
         color='#517fa4'
-        />
+        onPress={ () => this.props.navigation.navigate('Consultant') }/>
         <Text h5> DANIŞMANLAR </Text>
         </View>
 
@@ -46,6 +47,7 @@ export default class HomeScreen extends Component {
           reverse
           name='assignment'
           color='#517fa4'
+          onPress={ () => Alert.alert('Yükleniyor...', 'Henüz yapım aşamasında... :( ') }
         />
         <Text h5> EFORLARIM </Text>
         </View>
@@ -62,6 +64,7 @@ export default class HomeScreen extends Component {
           reverse
           name='date-range'
           color='#517fa4'
+          onPress ={ () => this.props.navigation.navigate('Planning')}
         />
         <Text h5> PLANLARIM </Text>
         </View>
@@ -75,6 +78,7 @@ export default class HomeScreen extends Component {
           reverse
           name='monetization-on'
           color='#517fa4'
+          onPress={ () => Alert.alert('Yükleniyor...', 'Henüz yapım aşamasında... :( ')}
         />
         <Text h5> MASRAFLARIM </Text>
         </View>
@@ -84,7 +88,7 @@ export default class HomeScreen extends Component {
       <View style={{flexDirection : 'flex-end'}}>
       <Button
         title="ÇIKIŞ YAP"
-        onPress={ () => this._signOutAsync() } 
+        onPress={ () => this._signOutAsync() }
         buttonStyle={{backgroundColor:'#517fa4'}}></Button>
       </View>
       </View>

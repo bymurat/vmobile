@@ -3969,6 +3969,14 @@ object.pick@^1.3.0:
   dependencies:
     isobject "^3.0.1"
 
+odata@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/odata/-/odata-0.4.0.tgz#a27788e18167b79a89bfcf3299863562becbf0ac"
+  integrity sha512-T66Jqhzep0rU4SSUQZ/McKhtqdlzDdgmQH4cfWxQAiO1PkJAtA3CiA06ZpckjiCozBL2g/yuEy2jtoAUy3w0eA==
+  dependencies:
+    q "^1.5.0"
+    xhr2 "^0.1.4 "
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -4268,6 +4276,11 @@ pseudomap@^1.0.2:
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
   integrity sha1-8FKijacOYYkX7wqKw0wa5aaChrM=
 
+q@^1.5.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
+  integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
+
 qs@^6.5.0:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
@@ -4333,6 +4346,13 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-animatable@^1.2.4, react-native-animatable@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.3.0.tgz#b5c3940fc758cfd9b2fe54613a457c4b6962b46e"
+  integrity sha512-GGYEYvderfzPZcPnw7xov4nlRmi9d6oqcIzx0fGkUUsMshOQEtq5IEzFp3np0uTB9n8/gZIZcdbUPggVlVydMg==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-branch@2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
@@ -4360,6 +4380,14 @@ react-native-gesture-handler@1.0.9, react-native-gesture-handler@^1.0.0:
 react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
+
+react-native-modal@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-modal/-/react-native-modal-7.0.0.tgz#85bda8b52e0e9181e09bd2ec636ed7cec10d74c3"
+  integrity sha512-i9OFAzuV+pvLcEUB1QvJ/KJlvcApQ+UdNhnjUKac5bP4Mb5kFlj+fkj6Y55hakBISwrQk/0N0Fn1vj8Ob7KR6g==
+  dependencies:
+    prop-types "^15.6.1"
+    react-native-animatable "^1.2.4"
 
 react-native-reanimated@1.0.0-alpha.10:
   version "1.0.0-alpha.10"
@@ -5464,6 +5492,11 @@ xcode@^0.9.1:
     pegjs "^0.10.0"
     simple-plist "^0.2.1"
     uuid "3.0.1"
+
+"xhr2@^0.1.4 ":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/xhr2/-/xhr2-0.1.4.tgz#7f87658847716db5026323812f818cadab387a5f"
+  integrity sha1-f4dliEdxbbUCYyOBL4GMras4el8=
 
 xmlbuilder@8.2.2:
   version "8.2.2"
