@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import { Linking, StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { Icon , Button, Card, List, ListItem, SearchBar  } from 'react-native-elements';
 import Modal from "react-native-modal";
-
-
+import oData from '../util/oDataHelper';
 
 
 export default class ConsultantScreen extends Component {
@@ -25,27 +24,43 @@ export default class ConsultantScreen extends Component {
   }
 
   callServer(filters){
-    return fetch('https://fiori.varucon.com/sap/opu/odata/sap/ZVPORTAL_SRV/ConsultantSet?$format=json',{
-        headers : {
-          'Content-Type' :  'application/json',
-          'Authorization' : 'Basic bWF5ZG9nZHU6S3JvbmlrMzY='
-        }
-        })
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log(responseJson.d.results);
-        this.setState({
-          isLoading: false,
-          list: responseJson.d.results,
-          fullList : responseJson.d.results
-        }, function(){
+
+    oData('ConsultantSet')
+      .get()
+        .then( (response) => {
+          this.setState({
+            isLoading: false,
+            list: response.data.d.results,
+            fullList : response.data.d.results
+          })
+          .fail( (err) => {
+            console.log(err);
+            Alert.alert('Hata Alındı', err.status);
+          });
 
         });
 
-      })
-      .catch((error) =>{
-        console.error(error);
-      });
+    // return fetch('https://fiori.varucon.com/sap/opu/odata/sap/ZVPORTAL_SRV/ConsultantSet?$format=json',{
+    //     headers : {
+    //       'Content-Type' :  'application/json',
+    //       'Authorization' : 'XXXXXX'
+    //     }
+    //     })
+    //   .then((response) => response.json())
+    //   .then((responseJson) => {
+    //     console.log(responseJson.d.results);
+    //     this.setState({
+    //       isLoading: false,
+    //       list: responseJson.d.results,
+    //       fullList : responseJson.d.results
+    //     }, function(){
+    //
+    //     });
+    //
+    //   })
+    //   .catch((error) =>{
+    //     console.error(error);
+    //   });
   }
 
   componentDidMount(){
