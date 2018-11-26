@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import { Card, Icon } from 'react-native-elements';
 import oData from '../util/oDataHelper';
@@ -7,6 +7,9 @@ import moment from 'moment';
 
 
 export default class PlanningScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Planlama Ekranı',
+  };
 
   constructor(props) {
   super(props);
@@ -19,7 +22,7 @@ export default class PlanningScreen extends React.Component {
   }
   getPlans( pDate, consultant) {
 
-    console.log(this.state.today.format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS));
+    //console.log(this.state.today.format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS));
 
     if(!pDate) pDate = this.state.today.format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
 
@@ -43,14 +46,42 @@ componentWillMount(){
   this.setState({ today : moment(new Date()) });
   var pDate = moment(new Date()).weekday(1).format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
   this.setState({ sDate : pDate});
+  this._retrieveData();
 }
+
+_retrieveData = async () => {
+
+  console.log('1');
+  try {
+    var value = await AsyncStorage.getItem('userToken');
+    //console.log('2');
+    //console.log(value);
+    var nValue = JSON.parse(value);
+
+    if (nValue.ConsId !== null) {
+      // We have data!!
+      console.log('2');
+      console.log(nValue.ConsId);
+
+      var pDate = moment(new Date()).weekday(1).format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
+
+      this.setState({ sDate : pDate});
+
+      this.getPlans(pDate, nValue.ConsId);
+    }
+   } catch (error) {
+     // Error retrieving data
+   }
+}
+
 componentDidMount() {
-  this.setState({ today : moment(new Date()) });
+  //this.setState({ today : moment(new Date()) });
 
-  var pDate = moment(new Date()).weekday(1).format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
 
-  this.setState({ sDate : pDate});
-  this.getPlans(pDate,'1201000008');
+
+
+
+  //this.getPlans(pDate,'1201000008');
 }
 
 
@@ -68,7 +99,7 @@ componentDidMount() {
 
             var firstDayOfWeek = moment(new Date()).weekday(1);
             var strTime1 = moment(firstDayOfWeek).add(j, 'd').format(moment.HTML5_FMT.DATE);
-            console.log('TARİH ARALIĞIM : '+ strTime1);
+            //console.log('TARİH ARALIĞIM : '+ strTime1);
 
             if (!this.state.items[strTime1]) {
                 this.state.items[strTime1] = [];
@@ -168,7 +199,7 @@ rowHasChanged(r1, r2) {
   return r1.name !== r2.name;
 }
 handleOnDayPressed (day){
-  console.log(day);
+  //console.log(day);
   var sDay = moment(day.dateString);
 }
 
@@ -177,7 +208,6 @@ handleOnDayPressed (day){
       <Agenda
         firstDay={1}
         onDayChange={(day)=>{console.log('day changed')}}
-        style={{ marginTop:20 }}
         items={this.state.items}
         selected={this.state.sDate}
         pastScrollRange={5}
