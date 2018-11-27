@@ -121,18 +121,10 @@ _retrieveData = async () => {
           }
         }
       }
-    const newItems = {};
-    Object.keys(items).forEach(key => {
-      newItems[key] = items[key];
-    });
-
-    //console.log(newItems);
-
     this.setState({
-      items: newItems,
+      items: items,
     });
-  }, 2000);
-  // console.log(`Load Items for ${day.year}-${day.month}`);
+  }, 1500);
 }
 
 
@@ -188,7 +180,7 @@ rowHasChanged(r1, r2) {
 }
 handleOnDayPressed (day){
 
-  var sDay = moment(day.dateString).format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
+  var sDay = moment(day.dateString).weekday(1).format(moment.HTML5_FMT.DATETIME_LOCAL_SECONDS);
   console.log(sDay);
   this.setState({ sDate : sDay });
   this.getPlans(sDay, this.state.ConsId );

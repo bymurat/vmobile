@@ -85,7 +85,7 @@ export default class HomeScreen extends Component {
         </View>
       </View>
 
-      <View style={{flexDirection : 'flex-end'}}>
+      <View >
       <Button
         title="ÇIKIŞ YAP"
         onPress={ () => this._signOutAsync() }
