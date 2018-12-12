@@ -47,7 +47,7 @@ export default class HomeScreen extends Component {
           reverse
           name='assignment'
           color='#517fa4'
-          onPress={ () => Alert.alert('Yükleniyor...', 'Henüz yapım aşamasında... :( ') }
+          onPress={ () => this.props.navigation.navigate('Activity') }
         />
         <Text h5> EFORLARIM </Text>
         </View>
