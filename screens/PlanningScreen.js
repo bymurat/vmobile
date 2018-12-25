@@ -11,14 +11,14 @@ export default class PlanningScreen extends React.Component {
   };
 
   constructor(props) {
-  super(props);
-  this.state = {
-    plans : {},
-    items: {},
-    ConsId : '',
-    today : null,
-    sDate : ''
-  };
+      super(props);
+      this.state = {
+        plans : {},
+        items: {},
+        ConsId : '',
+        today : null,
+        sDate : ''
+      };
   }
   getPlans( pDate, consultant) {
 

@@ -20,23 +20,29 @@ export default class SignInScreen extends Component {
     this.state = {
       username : '',
       password : '',
+      textInput : false,
       currentConsultant : {}
     };
   }
+
   render() {
     return (
-      <View style={styles.container}>
+      <View style={ this.state.textInput ? styles.containerTextInput : styles.container }>
 
           <Image
             style={styles.stretch}
             source={require('../assets/varucon_logo.png')}/>
           <Input
+            onFocus={() =>  this.setState({textInput : true})  }
+            onSubmitEditing={() =>  this.setState({textInput : false}) }
             placeholder='SAP Kullanıcı Adı'
             leftIcon={{ type: 'font-awesome', name: 'user' }}
             onChangeText={(un) => this.setState({ username : un })}
             value={this.state.username}
           />
           <Input
+            onFocus={() =>  this.setState({textInput : true})  }
+            onSubmitEditing={() =>  this.setState({textInput : false}) }
             secureTextEntry
             placeholder='Şifre'
             leftIcon={{ type: 'font-awesome', name: 'lock' }}
@@ -102,6 +108,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  containerTextInput: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom  :150
   },
   stretch : {
     height : 90,
