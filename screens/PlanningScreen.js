@@ -133,8 +133,7 @@ renderItem(item) {
     <View>
     <Card
       dividerStyle ={{ backgroundColor : 'black' }}
-      containerStyle={{ backgroundColor : item.bgColor }}
-      title={item.project}>
+      containerStyle={{ backgroundColor : item.bgColor }}>
       <View style={{ marginBottom : 20 }} >
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' , alignItems:'center' }} >
           <Icon
@@ -142,30 +141,18 @@ renderItem(item) {
             type='material-community'
             color='#696969'
             name='account-check' />
-            <Text>
-              {item.planLoc} - {item.planEnv}
-            </Text>
-            <Text>
-              {item.startTime} - {item.endTime}
-            </Text>
-            <Text>
-
-            </Text>
+            <Text>{item.planLoc}-{item.planEnv}</Text>
+            <Text>{item.startTime}-{item.endTime}</Text>
         </View>
-            <Text style={item.workWith != '' ? styles.text : styles.hideText}>
-              <Text style={{fontWeight : '600'}}>Çalışılacak Kişi :</Text> {item.workWith}
-            </Text>
+      <Text style={item.workWith != '' ? styles.text : styles.hideText}>
+      <Text style={{fontWeight : '600'}}>Çalışılacak Kişi :</Text> {item.workWith}</Text>
       <Text style={item.taskId != '' ? styles.text : styles.hideText}>
-        <Text style={{fontWeight : '600'}}>Çağrı Numarası :</Text> {item.taskId}
-      </Text>
+      <Text style={{fontWeight : '600'}}>Çağrı Numarası :</Text> {item.taskId}</Text>
       <Text style={item.note != '' ? styles.text : styles.hideText}>
-        <Text style={{fontWeight : '600'}}>Açıklama :</Text> {item.note}
-      </Text>
-      <Text >
-        <Text style={{fontWeight : '600'}}>Proje Sorumlusu :</Text> {item.projResponsible}
-      </Text>
+      <Text style={{fontWeight : '600'}}>Açıklama :</Text> {item.note}</Text>
+      <Text><Text style={{fontWeight : '600'}}>Proje Sorumlusu :</Text>{item.projResponsible}</Text>
       </View>
-    </Card>
+      </Card>
     </View>
   );
 }
@@ -208,7 +195,7 @@ handleOnDayPressed (day){
 const styles = StyleSheet.create({
 
   text:{
-
+    fontFamily: 'System'
   },
 
   hideText : {

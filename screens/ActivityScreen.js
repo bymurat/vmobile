@@ -14,17 +14,17 @@ LocaleConfig.locales['tr'] = {
 LocaleConfig.defaultLocale = 'tr';
 
 export default class PlanningScreen extends Component {
-  static navigationOptions = {
+  static navigationOptions = ( { navigation }) => {
+    return {
     title: 'Aktivite Ekranı',
     headerTitleStyle: {
       fontWeight: 'bold',
       fontFamily: 'System'
     },
-    headerRight :(<Button
-          onPress={ ()=> this.headerButtonPressed }
-          title="Tüm Ay"
-
-        />)
+    headerRight : ( <Button
+      onPress={navigation.getParam('increaseCount')}
+      title='Tüm Ay'/>)
+  };
   };
   constructor(props) {
     super(props);
@@ -34,7 +34,15 @@ export default class PlanningScreen extends Component {
           activities : [  ]
     };
     this._retrieveData();
+    this.props.navigation.setParams({ increaseCount: this._increaseCount });
   }
+
+
+  _increaseCount = () => {
+    this.headerButtonPressed();
+  };
+
+
 
   headerButtonPressed(){
     console.log("tüm ay pressed");
@@ -64,7 +72,7 @@ export default class PlanningScreen extends Component {
 
               if(r.length > 0 ){
 
-                  //this.setState({ activities : r });
+                  this.setState({ activities : r });
 
 
                   this.setCalendarColor(r);
@@ -141,7 +149,7 @@ calendarDayPressed(day){
             var r = response.data.d.results;
             console.log(r);
             if(r.length > 0){
-
+              this.setState({ activities : r});
             }
 
           })
@@ -177,21 +185,31 @@ getBackgroundColor(item){
         />
 
         <ScrollView>
-          <View style={{ flex :1}}>
-            <View style={{ margin: 10, flexDirection : 'row', justifyContent: 'space-between'}}>
-
-                <Text style={{  fontSize: 20, fontFamily: 'System'}}> Kalyon Destek </Text>
-
-              <View>
-              <Text style={{  fontSize: 20, fontFamily: 'System'}}> 8 <Text style={{  fontSize: 16, fontFamily: 'System'}}>Saat</Text> </Text>
-              <Icon name='food' type='material-community' color='#ccf6af'/>
-              <Icon name='food-off' type='material-community' color='#f4b084'/>
+        {
+          this.state.activities.map( (u, i) => {
+            return(
+              <View key={i} style={{ flex :1, margin : 5}}>
+                <View style={{
+                    margin: 10,
+                    flex :1,
+                    flexDirection : 'row',
+                    justifyContent: 'space-between'}}>
+                    <View style={{ flex :5 }} >
+                    <Text style={{ fontSize: 20, fontFamily: 'System'}}>{u.Projectname}</Text>
+                    <Text style={{ marginTop:5, fontFamily: 'System'}}>{moment(u.Actdate).format('DD.MM.YYYY')}</Text>
+                    <Text style={{ marginTop:5, fontFamily: 'System' }}>{u.Actnote}</Text>
+                    </View>
+                  <View style={{ flex :1}} >
+                  <Text style={{ fontSize: 20, fontFamily: 'System'}}> {u.Actduration/60} <Text style={{  fontSize: 16, fontFamily: 'System'}}>Saat</Text> </Text>
+                  {u.Actfoodcard === 'X' ? <Icon containerStyle={{marginTop:15}} name='food' type='material-community' color='#889900'/> : <Icon containerStyle={{marginTop:15}} name='food-off' type='material-community' color='red'/> }
+                  </View>
+                </View>
+                  <View>
+                </View>
               </View>
-
-            </View>
-            <Text style={{   fontFamily: 'System'}}> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </Text>
-
-          </View>
+            );
+          })
+        }
         </ScrollView>
         </View>
     );
