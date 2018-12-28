@@ -7,3 +7,5 @@ npm-debug.*
 *.mobileprovision
 _bg
 _bg_.js
+ios/*
+android/*
