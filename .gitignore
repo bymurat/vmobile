@@ -5,3 +5,7 @@ npm-debug.*
 *.p12
 *.key
 *.mobileprovision
+_bg
+_bg_.js
+ios/*
+android/*
