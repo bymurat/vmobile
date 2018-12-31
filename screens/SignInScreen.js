@@ -98,6 +98,12 @@ export default class SignInScreen extends Component {
   _signInAsync = async () => {
 
     await AsyncStorage.setItem('userToken', JSON.stringify(this.state.currentConsultant));
+
+    await AsyncStorage.setItem('username', this.state.username);
+    await AsyncStorage.setItem('password', this.state.password);
+
+
+
     this.props.navigation.navigate('App');
   };
 }

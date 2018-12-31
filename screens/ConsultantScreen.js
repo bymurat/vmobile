@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Linking, StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
+import { AsyncStorage, Linking, StyleSheet, Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import { Icon , Button, Card, List, ListItem, SearchBar  } from 'react-native-elements';
 import Modal from "react-native-modal";
 import oData from '../util/oDataHelper';
@@ -15,15 +15,37 @@ export default class ConsultantScreen extends Component {
     this.state ={
       isLoading: true,
       modalVisible : false,
+      uname :'',
+      password : '',
       consultant : {
         ConsName : '',
         ConsId   :''
       },
       list : []
     }
+    this._bootstrapAsync();
+
   }
 
+  _bootstrapAsync = async () => {
+    const userToken = await AsyncStorage.getItem('userToken');
+    const username = await AsyncStorage.getItem('username');
+    const password = await AsyncStorage.getItem('password');
+
+    //console.log(userToken);
+
+    this.setState({ uname : username.unama, password: password});
+
+  };
+
   callServer(filters){
+
+
+    oData().config({
+      username: this.state.uname,
+      password: this.state.password
+    });
+
 
     oData('ConsultantSet')
       .get()
@@ -101,12 +123,12 @@ export default class ConsultantScreen extends Component {
   }
 
   convertURLForMedia(item){
-    return "https://fiori.varucon.com/sap/opu/odata/sap/HCMFAB_EMPLOYEELOOKUP_SRV/EmployeePictureSet('"+item.ConsId.slice(0,6) + item.ConsId.slice(-2)+"')/$value";
+    return "https://fiori.varucon.com/sap/opu/odata/sap/HCMFAB_EMPLOYEELOOKUP_SRV/EmployeePictureSet('"+item.Pernr+"')/$value";
   }
 
   listItemPressed (item){
 
-      item.imageuri = "https://fiori.varucon.com/sap/opu/odata/sap/HCMFAB_EMPLOYEELOOKUP_SRV/EmployeePictureSet('"+item.ConsId.slice(0,6) + item.ConsId.slice(-2)+"')/$value"
+      item.imageuri = "https://fiori.varucon.com/sap/opu/odata/sap/HCMFAB_EMPLOYEELOOKUP_SRV/EmployeePictureSet('"+item.Pernr+"')/$value"
 
 
       //item.imageuri = "https://fiori.varucon.com/sap/bc/ui5_ui5/sap/zvaruconplan/images/_consp/d1.png";
